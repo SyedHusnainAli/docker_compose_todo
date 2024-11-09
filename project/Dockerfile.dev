@@ -1,0 +1,15 @@
+FROM python:3.12
+
+LABEL maintainer="husnainshah@1527.com"
+
+WORKDIR /code
+
+RUN pip install poetry
+
+COPY ./pyproject.toml /code
+COPY ./project /code/project
+
+
+RUN poetry install
+
+CMD [ "poetry", "run", "uvicorn", "project.main:app", "--reload" ]
